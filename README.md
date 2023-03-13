@@ -1,8 +1,6 @@
 
-# template
-intended to be a good starting point for a semi serious project in c++
+# Reflective
+intended to be a template for reflective runtime in c++
 
-# included
-Jenkins CI
-C++
-CMake
+# Included
+- CMake
