@@ -32,12 +32,11 @@ public:
 
 int main(int _argc, char **_argv)
 {
-
     printf("Program code.\n");
-
     Reflect<MyClass>::properties()["myInt"] = 123;
     Reflect<MyClass>::properties()["myDouble"] = 3.14;
     Reflect<MyClass>::properties()["myString"] = std::string("Hello");
+    Reflect<MyClass>::properties()["loggable"] = true;
 
     std::cout << "Class Name: " << Reflect<MyClass>::className() << std::endl;
 
@@ -55,6 +54,10 @@ int main(int _argc, char **_argv)
         else if (prop.second.type() == typeid(std::string))
         {
             std::cout << prop.first << ": " << std::any_cast<std::string>(prop.second) << std::endl;
+        }
+        else if (prop.second.type() == typeid(bool))
+        {
+            std::cout << prop.first << ": " << std::any_cast<bool>(prop.second) << std::endl;
         }
     }
 

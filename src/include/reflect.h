@@ -65,3 +65,33 @@ public:
         properties()[propName] = ss.str();
     }
 };
+
+// Specialize the Reflect class template for std::string
+template <>
+class Reflect<bool> {
+public:
+    static std::string className() {
+        return "bool";
+    }
+
+    static std::map<std::string, std::any>& properties() {
+        static std::map<std::string, std::any> props;
+        return props;
+    }
+
+    template <typename U>
+    static U get(const std::string& propName) {
+        auto it = properties().find(propName);
+        if (it != properties().end()) {
+            return std::any_cast<U>(it->second);
+        }
+        throw std::runtime_error("Property does not exist");
+    }
+
+    template <typename U>
+    static void set(const std::string& propName, const U& value) {
+        std::ostringstream ss;
+        ss << value;
+        properties()[propName] = ss.str();
+    }
+};
